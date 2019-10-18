@@ -1,22 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Info, PatientIcon, VSpace, Button } from '@ambler/andive'
 
 import { AppContainer, AppRow, AppCol } from './responsive'
-import { useGames } from '../lib/api'
-
-const LobbyRoot = styled.div`
-  padding-bottom: 32px;
-`
 
 const GameRow = styled(AppRow)`
-  border: 1px solid white;
+  border: 1px solid #eee;
   border-radius: 6px;
   padding: 6px;
+  margin-bottom: 8px;
+  background: white;
 `
 
-export function Lobby() {
-  const { data, loading, error } = useGames()
-
+export function Lobby({ data, loading, error }) {
   if (loading) {
     return <GameRow>Loading ...</GameRow>
   }
@@ -39,16 +35,43 @@ export function Lobby() {
 
   const { games } = data
 
-  return games.map(game => {
-    return (
-      <GameRow key={game.id}>
-        <AppCol xs={12} md={4}>
-          {game.name}
-        </AppCol>
-        <AppCol xs={12} md={8}>
-          {game.status}
-        </AppCol>
-      </GameRow>
-    )
-  })
+  return (
+    <>
+      <Info icon={<PatientIcon circle />} iconSize={32}>
+        <Info.Label label={['Lobby', `${games.filter(game => game.status !== 'finished').length} games`].join(' - ')} />
+      </Info>
+
+      <VSpace px={8} />
+
+      {games.map(game => (
+        <GameRow key={game.id} align="center">
+          <AppCol xs={12} md={4}>
+            <Info>
+              <Info.Item item="Name" />
+              <Info.Label label={game.name} />
+            </Info>
+          </AppCol>
+          <AppCol xs={12} md={4}>
+            <Info>
+              <Info.Item item="Status" />
+              <Info.Label label={game.status} />
+            </Info>
+          </AppCol>
+          <AppCol xs={12} md={2}>
+            <Info>
+              <Info.Item item="Players" />
+              <Info.Label label={game.status === 'pending' ? '1/2' : game.status === 'running' ? '2/2' : '0'} />
+            </Info>
+          </AppCol>
+          <AppCol xs={12} md={2} style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            {game.status === 'pending' ? (
+              <Button label="Join" variant="primary" mobile small />
+            ) : game.status === 'running' ? (
+              <Button label="Watch" mobile small />
+            ) : null}
+          </AppCol>
+        </GameRow>
+      ))}
+    </>
+  )
 }
