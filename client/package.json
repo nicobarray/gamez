@@ -1,0 +1,22 @@
+{
+  "name": "create-next-example-app",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@ambler/andive": "0.11.0-canary.19",
+    "moment": "2.24.0",
+    "next": "9.1.1",
+    "react": "16.10.2",
+    "react-async-hook": "3.6.1",
+    "react-dom": "16.10.2",
+    "react-grid-system": "6.0.2",
+    "react-hook-form": "3.24.1",
+    "styled-components": "4.4.0"
+  },
+  "devDependencies": {
+    "babel-plugin-styled-components": "1.10.6"
+  }
+}
