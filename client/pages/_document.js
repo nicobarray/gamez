@@ -21,7 +21,6 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
-          <title>GAMEZ</title>
           <link rel="icon" href="/static/favicon.png" />
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Asap&display=swap" />
           {/* Step 5: Output the styles in the head  */}

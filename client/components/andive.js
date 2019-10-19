@@ -4,8 +4,8 @@ import { Typography, palette } from '@ambler/andive'
 export const Input = styled.input`
   padding: 16px;
   border-radius: 16px;
-  border: 1px solid #eee;
-  background: #eee;
+  border: 1px solid ${palette.darkGrey};
+  background: ${palette.darkGrey};
 
   outline: none;
   width: 100%;

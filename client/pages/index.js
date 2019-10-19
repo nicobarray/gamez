@@ -2,18 +2,22 @@ import React from 'react'
 import Link from 'next/link'
 import styled, { createGlobalStyle } from 'styled-components'
 import useForm from 'react-hook-form'
-import { Title, AppBar, Baseline, VSpace } from '@ambler/andive'
+import { Title, AppBar, VSpace, Button, toastSuccess } from '@ambler/andive'
 
 import { Lobby } from '../components/lobby'
 import { LobbyForm } from '../components/lobby-form'
 import { AppContainer, AppRow, AppCol } from '../components/responsive'
 import { useGames } from '../lib/api'
+import { Game } from '../components/game'
+import { useRouter } from 'next/router'
 
 const Home = () => {
-  const { data, loading, error, refetch } = useGames()
+  const gamesQuery = useGames()
+  const router = useRouter()
+  const id = router.query.gid
 
   return (
-    <Baseline>
+    <>
       <AppBar height={64}>
         <Title title="Gamez" />
       </AppBar>
@@ -23,15 +27,15 @@ const Home = () => {
       <AppContainer>
         <AppRow>
           <AppCol>
-            <LobbyForm refetchLobby={refetch} />
+            <LobbyForm refetchLobby={gamesQuery.refetch} />
           </AppCol>
         </AppRow>
 
         <VSpace px={16} />
 
-        <Lobby data={data} error={error} loading={loading} />
+        <Lobby {...gamesQuery} />
       </AppContainer>
-    </Baseline>
+    </>
   )
 }
 

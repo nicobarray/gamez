@@ -14,7 +14,9 @@
     "react-dom": "16.10.2",
     "react-grid-system": "6.0.2",
     "react-hook-form": "3.24.1",
-    "styled-components": "4.4.0"
+    "react-use-dimensions": "1.2.1",
+    "styled-components": "4.4.0",
+    "use-interval": "1.1.0"
   },
   "devDependencies": {
     "babel-plugin-styled-components": "1.10.6"

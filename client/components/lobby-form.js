@@ -1,11 +1,12 @@
 import React from 'react'
 import useForm from 'react-hook-form'
 import styled from 'styled-components'
-import { Button, Typography, Info } from '@ambler/andive'
+import { Button, Typography, Info, toastSuccess } from '@ambler/andive'
 
 import { Input } from './andive'
 import { AppContainer, AppRow, AppCol } from './responsive'
 import { createGame } from '../lib/api'
+import { useRouter } from 'next/router'
 
 const Form = styled.form`
   border: 1px solid white;
@@ -19,14 +20,16 @@ const Error = styled.div`
 `
 
 export function LobbyForm({ refetchLobby }) {
-  const { register, handleSubmit, errors, clearError, reset } = useForm()
+  const { register, handleSubmit, errors, reset } = useForm()
   const [name, setName] = React.useState('')
+  const router = useRouter()
 
   const onCreateGame = async values => {
-    const res = await createGame(values.name)
+    const { id, player } = await createGame(values.name)
     refetchLobby()
-    clearError()
     reset()
+    toastSuccess(`Game created !`)
+    router.push(`/games/${id}?player=${player}`)
   }
 
   return (
