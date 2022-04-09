@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "@ambler/andive": "0.11.0-canary.19",
-    "moment": "2.24.0",
+    "moment": "2.29.2",
     "next": "9.1.1",
     "react": "16.10.2",
     "react-async-hook": "3.6.1",
